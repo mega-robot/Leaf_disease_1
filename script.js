@@ -1,34 +1,24 @@
 const URL = "https://teachablemachine.withgoogle.com/models/liz-08qWt/";
-const MODEL_URL = URL + "model.json";
-const METADATA_URL = URL + "metadata.json";
-
-let model, webcam, labelContainer;
+let model;
 
 async function init() {
-  model = await tmImage.load(MODEL_URL, METADATA_URL);
-  const flip = true;
-  webcam = new tmImage.Webcam(320, 240, flip);
-  await webcam.setup();
-  await webcam.play();
-  
-  document.getElementById("webcam").appendChild(webcam.canvas);
-  document.getElementById("overlay").getContext("2d");
-  
-  labelContainer = document.getElementById("label");
+  const modelURL = URL + "model.json";
+  const metadataURL = URL + "metadata.json";
+  model = await tmImage.load(modelURL, metadataURL);
+  console.log("Model Loaded");
 }
 
-async function classifyLoop() {
-  while (true) {
-    webcam.update();
-    const prediction = await model.predict(webcam.canvas);
-    const sorted = prediction.sort((a, b) => b.probability - a.probability);
-    labelContainer.innerText = sorted[0].className;
-    await tmImage.nextFrame();
-  }
-}
+document.getElementById("imageUpload").addEventListener("change", async function (e) {
+  const file = e.target.files[0];
+  if (!file) return;
 
-document.getElementById("start-btn").addEventListener("click", async () => {
-  await init();
-  classifyLoop();
-  document.getElementById("start-btn").style.display = "none";
+  const imgElement = document.getElementById("preview");
+  imgElement.src = URL.createObjectURL(file);
+  imgElement.onload = async () => {
+    const prediction = await model.predict(imgElement);
+    const best = prediction.sort((a, b) => b.probability - a.probability)[0];
+    document.getElementById("label").innerText = best.className;
+  };
 });
+
+init();

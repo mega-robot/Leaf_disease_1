@@ -2,29 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Farm Crop Classifier</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Leaf Disease Classifier</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
-    <h1>🌾 FarmCrop Classifier</h1>
-    <p>Identify your crop – quick, simple, farming style!</p>
+    <h1>Leaf Disease Identifier</h1>
+    <p>Upload a leaf image to detect disease</p>
   </header>
 
   <main>
-    <div class="camera-container">
-      <video id="webcam" autoplay playsinline muted></video>
-      <canvas id="overlay"></canvas>
+    <input type="file" id="imageUpload" accept="image/*" />
+    <div class="image-preview">
+      <img id="preview" src="" alt="Your Image" />
     </div>
-    <div class="result">
-      Predicted Crop: <span id="label">–</span>
-    </div>
-    <button id="start-btn">Start Classification</button>
+    <div class="result">Predicted: <span id="label">–</span></div>
   </main>
 
   <footer>
-    <p>Built for farmers by farmers. 🤝</p>
+    <p>By Mega-Robot | Powered by Teachable Machine</p>
   </footer>
 
   <script src="tmImage.min.js"></script>
