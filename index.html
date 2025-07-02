@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Farm Crop Classifier</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>🌾 FarmCrop Classifier</h1>
+    <p>Identify your crop – quick, simple, farming style!</p>
+  </header>
+
+  <main>
+    <div class="camera-container">
+      <video id="webcam" autoplay playsinline muted></video>
+      <canvas id="overlay"></canvas>
+    </div>
+    <div class="result">
+      Predicted Crop: <span id="label">–</span>
+    </div>
+    <button id="start-btn">Start Classification</button>
+  </main>
+
+  <footer>
+    <p>Built for farmers by farmers. 🤝</p>
+  </footer>
+
+  <script src="tmImage.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
